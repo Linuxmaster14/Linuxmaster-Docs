@@ -18,6 +18,7 @@
   * [Docker Basic](devops/docker/docker-basic.md)
   * [Docker Compose](devops/docker/docker-compose.md)
 * [Ansible](devops/ansible.md)
+* [Terraform](devops/terraform.md)
 * [Git](devops/git.md)
 
 ## ⏺ AWS
