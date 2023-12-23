@@ -1015,3 +1015,15 @@ root@linuxmaster:~# systemctl restart apache2
 * [ ] Memory-swapping statistics can be viewed using the psmap utility.
 
 **Answer:** B, C. Memory for idle processes can be swapped out from RAM to a special partition called swap space, swap, or virtual memory. Therefore, options B and C are correct. Memory is divided up into chunks called pages (option A), not sheets. Swapping is the memory management technique where idle processes’ memory is swapped out to swap. The processes do not trade memory (option D). Finally, the psmap tool is primarily for mapping processes (option E). The best tools for viewing memory statistics are tools like `free`, `sar`, and `vmstat`.
+
+**21.** In the following output from top, which processes contribute to the percentage of time that the CPU spends in the state of wa?
+```bash
+Tasks: 193 total, 1 running, 190 sleeping, 2 stopped, 0 zombie
+Cpu(s): 0.5%us, 0.3%sy, 0.0%ni, 98.2%id, 1.0%wa, 0.0%hi, 0.0%si, 0.0%st
+```
+
+* [ ] Processes waiting for user interaction.
+* [ ] Processes that were already closed and are waiting to be launched again.
+* [ ] Processes that have not been scheduled yet because they haven't been fully loaded into RAM or are in swap.
+* [x] Processes waiting for IO operations to complete.
+
