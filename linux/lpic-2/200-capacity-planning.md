@@ -958,7 +958,9 @@ root@linuxmaster:~# systemctl restart apache2
 
 **14.** In the following output of the command uptime, the load averages represent the system load averages for what time frames?
 
-`12:10:05 up 18 days, 19:00, 2 users, load average: 0.47, 24.71, 35.31`
+```bash
+12:10:05 up 18 days, 19:00, 2 users, load average: 0.47, 24.71, 35.31
+```
 
 * [x] 1, 5 and 15 minutes
 * [ ] 1, 15 and 30 minutes
@@ -1017,6 +1019,7 @@ root@linuxmaster:~# systemctl restart apache2
 **Answer:** B, C. Memory for idle processes can be swapped out from RAM to a special partition called swap space, swap, or virtual memory. Therefore, options B and C are correct. Memory is divided up into chunks called pages (option A), not sheets. Swapping is the memory management technique where idle processes’ memory is swapped out to swap. The processes do not trade memory (option D). Finally, the psmap tool is primarily for mapping processes (option E). The best tools for viewing memory statistics are tools like `free`, `sar`, and `vmstat`.
 
 **21.** In the following output from top, which processes contribute to the percentage of time that the CPU spends in the state of wa?
+
 ```bash
 Tasks: 193 total, 1 running, 190 sleeping, 2 stopped, 0 zombie
 Cpu(s): 0.5%us, 0.3%sy, 0.0%ni, 98.2%id, 1.0%wa, 0.0%hi, 0.0%si, 0.0%st
@@ -1027,3 +1030,106 @@ Cpu(s): 0.5%us, 0.3%sy, 0.0%ni, 98.2%id, 1.0%wa, 0.0%hi, 0.0%si, 0.0%st
 * [ ] Processes that have not been scheduled yet because they haven't been fully loaded into RAM or are in swap.
 * [x] Processes waiting for IO operations to complete.
 
+**22.** In this example output, which descriptions match the purpose of the free, buff and cache columns? (Choose THREE correct answers.)
+
+```bash
+# vmstat 1 100
+
+procs -----------memory---------- ---swap-- -----io---- --system-- ----cpu----
+r b swpd free buff cache si so bi bo in cs us sy id wa
+0 0 0 282120 134108 5797012 0 0 0 2 0 0 0 0 100         0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 359 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1117 577 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 366 0 0 100 0
+```
+
+* [ ] Used swap space
+* [ ] RAM available for filesystem buffers
+* [x] Available free RAM
+* [x] RAM used for buffers
+* [x] RAM used for filesystem cache
+
+**23.** When is historical data of resource usage important? (Select THREE correct answers.)
+
+* [x] Predicting when resources will need to be increased.
+* [ ] Selecting a computer vendor.
+* [ ] Identifying processes killed during out of memory occurrences.
+* [x] Diagnosing capacity problems.
+* [x] Troubleshooting a software problem.
+
+**24.** In capacity planning exercises, which tools assist in listing and identifying processes of interest? (Choose TWO correct answers.)
+
+* [ ] acpid
+* [x] lsof
+* [x] pstree
+* [ ] telinit
+
+**25.** In the below example output, which columns detail the percent of time the CPU spent running non-kernel code and the percent of time the CPU spent running kernel code? (Choose TWO correct answers.)
+
+```bash
+# vmstat 1 100
+
+procs -----------memory---------- ---swap-- -----io---- --system-- ----cpu----
+r b swpd free buff cache si so bi bo in cs us sy id wa
+0 0 0 282120 134108 5797012 0 0 0 2 0 0 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 359 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1117 577 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 366 0 0 100 0
+```
+
+* [ ] id
+* [x] us
+* [ ] wa
+* [x] sy
+
+**26.** In the following output, what percentage of time was the CPU waiting for pending I/O?
+
+```bash
+# vmstat 1 100
+
+procs -----------memory---------- ---swap-- -----io---- --system-- ----cpu----
+
+r b swpd free buff cache si so bi bo in cs us sy id wa
+0 0 0 282120 134108 5797012 0 0 0 2 0 0 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 359 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1117 577 0 0 100 0
+0 0 0 282120 134108 5797012 0 0 0 0 1007 366 0 0 100 0
+```
+
+* [x] 0
+* [ ] 100
+* [ ] 35.9
+* [ ] 57.7
+* [ ] 36.6
+
+**27.** Which of the following tools are used to measure memory usage? (Choose THREE correct answers.)
+
+* [ ] mpstat
+* [ ] pstree
+* [x] sar
+* [x] top
+* [x] vmstat
+
+**28.** Which of the following is a side effect of extensive usage of swap space?
+
+* [ ] The root filesystem may become full because swap space is always located on the system root partition.
+* [x] The overall system performance may degrade because of heavy hard disk use and memory reorganization.
+* [ ] Since processes always exist completely in either RAM or swap, regular RAM may become unused if the kernel does not move processes back from the swap space to memory.
+* [ ] The memory may become fragmented and slow down the access to memory pages. However, this can be kept to a minimum by the regular use of memfrag -d.
+* [ ] Applications need to restart because their virtual memory addresses change to reflect memory relocation to the swap address area.
+
+**29.** Which of the following commands will provide the PIDs of the processes sorted by which are using the most CPU cycles on the Linux system?
+
+* [x] top
+* [ ] uptime
+* [ ] ps aux
+* [ ] vmstat
+* [ ] freemem
+
+**30.** Which command will report information on memory usage, paging and block input/output?
+
+* [x] vmstat
+* [ ] free
+* [ ] memshow
+* [ ] ps
+* [ ] top
