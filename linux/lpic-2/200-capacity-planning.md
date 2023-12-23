@@ -559,7 +559,7 @@ top [OPTIONS]
 | `H`    | Show thread count                 |
 | `m`    | Display visual output of memory   |
 | `f`    | Open field management window      |
-| `R`    | Sorf from least to most           |
+| `R`    | Sort from least to most           |
 | `W`    | Write configuration to a file     |
 | `n`    | Set number of processes displayed |
 | `k`    | Kill a process                    |
@@ -1133,3 +1133,279 @@ r b swpd free buff cache si so bi bo in cs us sy id wa
 * [ ] memshow
 * [ ] ps
 * [ ] top
+
+**31.** Using the iostat command you want to display more detailed statistics (Extended), but you want the output of this command to be printed on the screen 5 times between 2-second update intervals. Which of the following is correct to accomplish this task?
+
+* [ ] iostat -v 5 2
+* [ ] iostat -x 5 2
+* [x] iostat -x 2 5
+* [ ] iostat -v 2 5
+
+**32.** Which of the commands below will return virtual memory statistics information about processes, memory, pagination, block IO, trap and CPU usage?
+
+* [x] vmstat
+* [ ] sar
+* [ ] pstree
+* [ ] iostat
+
+**33.** Which of the commands below is used to monitor the load of system input / output (I/O) devices. Where is this done by observing the devices are active in relation to their average transfer rates?
+
+* [ ] sar
+* [x] iostat
+* [ ] vmstat
+* [ ] pstree
+
+**34.** Which of the commands below collects, reports, or saves system activity information?
+
+* [x] sar
+* [ ] iostat
+* [ ] vmstat
+* [ ] pstree
+
+**35.** Which of the iostat command options can be used to display device statistics information (disks and partitions)?
+
+* [ ] iostat -x
+* [x] iostat -p
+* [ ] iostat -l
+* [ ] iostat -v
+
+**36.** Which of the iostat options can be used to display a CPU usage report?
+
+* [ ] iostat -b
+* [ ] iostat -x
+* [ ] iostat -d
+* [x] iostat -c
+
+**37.** Which of the iostat command options can be used to display a device usage report (Disks)?
+
+* [ ] iostat -b
+* [ ] iostat -x
+* [x] iostat -d
+* [ ] iostat -c
+
+**38.** Which command below displays information about the users currently connected to the machine, their processes and the same statistics as provided by the uptime command?
+
+* [ ] top
+* [x] w
+* [ ] free
+* [ ] whoami
+
+**39.** When outputting the vmstat command, in the procs field, what do the columns r and b mean? (Select 2 responses).
+
+* [ ] The number of executable processes (running and waiting for execution time).
+* [ ] Shows the percentage of time spent running non-kernel code.
+* [ ] The number of processes in uninterrupted sleep.
+* [ ] Show the percentage of time stolen from a virtual machine.
+
+**40.** Which of the columns below is related to the system field in the output of the vmstat command that shows the number of contexts per second, including the clock?
+
+* [x] cs
+* [ ] sy
+* [ ] in
+* [ ] wa
+* [ ] us
+
+**41.** Which of the columns below is related to the system field in the output of the vmstat command that shows the number of interrupts per second, including the clock?
+
+* [ ] cs
+* [ ] sy
+* [x] in
+* [ ] wa
+* [ ] us
+
+**42.** Which of the alternatives below are columns related to the swap field presented in the output of the vmstat command? (Select 2 responses).
+
+* [x] si
+* [ ] bi
+* [x] so
+* [ ] bo
+* [ ] id
+
+**43.** Which of the alternatives below are columns related to the io field presented in the output of the vmstat command? (Select 2 responses).
+
+* [ ] si
+* [x] bi
+* [ ] so
+* [x] bo
+* [ ] id
+
+**44.** Which of the following, using the vmstat command, will display event counter statistics?
+
+* [ ] vmstat -a
+* [ ] vmstat -d
+* [x] vmstat -s
+* [ ] vmstat -p
+* [ ] vmstat -D
+
+**45.** Which of the following, using the vmstat command, will display disk statistics?
+
+* [ ] vmstat -a
+* [x] vmstat -d
+* [ ] vmstat -s
+* [ ] vmstat -p
+* [ ] vmstat -D
+
+**46.** Which of the following, using the vmstat command, will display a summary of disk statistics?
+
+* [ ] vmstat -a
+* [ ] vmstat -d
+* [ ] vmstat -s
+* [ ] vmstat -p
+* [x] vmstat -D
+
+**47.** Which of the following, using the vmstat command, will display statistics for a specific partition?
+
+* [ ] vmstat -a
+* [ ] vmstat -d
+* [ ] vmstat -s
+* [x] vmstat -p
+* [ ] vmstat -D
+
+**48.** Which of the free command options will update the command output every 2 seconds for 5 times on the screen? (Select 2 responses).
+
+* [x] free -s 2 -c 5
+* [x] free -s 2 --count 5
+* [ ] free -s 2 5
+* [ ] free -s 2 -r 5
+
+**49.** Which of the free command options will update the command output on the screen every 2 seconds?
+
+* [ ] free -n 2
+* [ ] free -t 2
+* [x] free -s 2
+* [ ] N.D.A
+
+**50.** Which of the alternatives below will list detailed memory statistics, showing the total RAM + SWAP memory, printing the result in the output in a more readable (- human) form for the user?
+
+* [ ] free -vht
+* [x] free -lth
+* [ ] free -ghl
+* [ ] free -x
+
+**51.** Which option in the sar command displays paging statistics?
+
+* [x] -B
+* [ ] -b
+* [ ] -d
+* [ ] -p
+* [ ] -r
+
+**52.** Which option in the sar command displays a memory usage statistics report?
+
+* [ ] -m
+* [ ] -b
+* [ ] -d
+* [ ] -R
+* [x] -r
+
+**53.** Which option of the sar command will report the queue size and load averages?
+
+* [ ] -S
+* [x] -q
+* [ ] -w
+* [ ] -y
+* [ ] -d
+
+**54.** Which option of the sar command will report an I/O transfer rate report?
+
+* [ ] -S
+* [ ] -q
+* [x] -b
+* [ ] -y
+* [ ] -d
+
+
+**55.** Which option of the sar command will report swap statistics? (Select 2 responses).
+
+* [x] -S
+* [ ] -q
+* [x] -W
+* [ ] -y
+* [ ] -d
+
+**56.** Which option of the sar command will report the activity of each block device?
+
+* [ ] -S
+* [ ] -q
+* [ ] -b
+* [ ] -y
+* [x] -d
+
+**57.** Which option in the sar command will report the activity of TTY (Remote Terminals) devices?
+
+* [ ] -S
+* [ ] -q
+* [ ] -b
+* [x] -y
+* [ ] -d
+
+**58.** Which of the commands below can be used to view the PID of a program that we have just started? (Select 2 responses).
+
+* [ ] iostat
+* [x] ps
+* [ ] vmstat
+* [x] top
+
+**59.** What is the result of the `ps ef` command?
+
+* [ ] List user processes running as a tree
+* [ ] List stopped processes.
+* [x] List all processes running as a tree.
+* [ ] List all system processes running as a tree.
+
+**60.** Which of the commands below will return a list of processes that are running on the current terminal?
+
+* [ ] top
+* [x] ps
+* [ ] vmstat
+* [ ] iostat
+
+**61.** Which command will list all processes, displaying the names of the users who started them?
+
+* [ ] ps a
+* [ ] ps ag
+* [x] ps aux
+* [ ] ps ac
+
+**62.** Which command displays details about the processes that are running in real time on the server?
+
+* [ ] ps
+* [x] top
+* [ ] vmstat
+* [ ] iostat
+
+**63.** Which of the options ("Internal option of the top command") below can be used to change the priority of a process already running?
+
+* [ ] -t
+* [ ] -d
+* [ ] -b
+* [x] -r
+* [ ] -k
+
+**64.** Which of the following will set the update time to 2 seconds on standard output using the top command?
+
+* [ ] top -n 2
+* [x] top -d 2
+* [ ] top -i 2
+* [ ] N.D.A
+
+**65.** Which "top" command will ignore idle processes?
+
+* [ ] top -b
+* [x] top -i
+* [ ] top -d
+* [ ] N.D.A
+
+**66.** Which command will update the top command's standard output 4 times and then exit the program?
+
+* [ ] top -d 4
+* [ ] top -i 4
+* [x] top -n 4
+* [ ] N.D.A
+
+**67.** Which top command will only list the processes of the user root?
+
+* [ ] top -L root
+* [x] top -u root
+* [ ] top -l root
+* [ ] N.D.A
