@@ -104,7 +104,7 @@ mkinitramfs -o initrd_image kernel_version #Ubuntu
 | `oldconfig`       | Update current config utilizing a provided `.config` as base |
 | `mrproper`        | Remove all generated files + config + various backup files   |
 | `zImage`          | Compressed kernel image (`arch/x86/boot/zImage`)             |
-| `bzImage`         | Compressed kernel image (`arch/x86/boot/zImage`)             |
+| `bzImage`         | Compressed kernel image (`arch/x86/boot/bzImage`)            |
 | `modules`         | Build all modules                                            |
 | `modules_install` | Install all modules to `INSTALL_MOD_PATH` (default: /)       |
 | `rpm_pkg`         | Build both source and binary RPM kernel packages             |
@@ -393,140 +393,140 @@ lsusb [options]
 * [ ] Graphical desktop
 * [ ] Application software
 
-**14.** What is the area on the hard disk called that is used as memory storage?&#x20;
+**14.** What is the area on the hard disk called that is used as memory storage?
 
 * [x] Swap Space
 * [ ] Virtual memory
 * [ ] Filesystem
 * [ ] Physical Memory
 
-**15.** What method does Linux use to load device drivers into the kernel?&#x20;
+**15.** What method does Linux use to load device drivers into the kernel?
 
 * [ ] DLL Files
 * [ ] Virtual memory
 * [x] Modules
 * [ ] Bootloader
 
-**16.** Which kernel file type is used to boot the Linux system?&#x20;
+**16.** Which kernel file type is used to boot the Linux system?
 
 * [x] Binary file
 * [ ] Modules
 * [ ] Patch file
 * [ ] Source code
 
-**17.** What type of release can you use to upgrade an existing kernel to a newer version?&#x20;
+**17.** What type of release can you use to upgrade an existing kernel to a newer version?
 
 * [x] Patch release
 * [ ] Modules
 * [ ] Binary files
 * [ ] Development release
 
-**18.** Which make utility target uses text-based questions to configure the kernel?&#x20;
+**18.** Which make utility target uses text-based questions to configure the kernel?
 
 * [ ] xconfig
 * [ ] mrproper
 * [ ] clean
 * [x] config
 
-**19.** Which make utility target uses a graphical interface to configure the kernel?&#x20;
+**19.** Which make utility target uses a graphical interface to configure the kernel?
 
 * [ ] config
 * [ ] mrproper
 * [x] gconfig
 * [ ] clean
 
-**20.** Which make utility target should you use to remove any old object files from a previous compile?&#x20;
+**20.** Which make utility target should you use to remove any old object files from a previous compile?
 
 * [ ] gconfig
 * [x] mrproper
 * [ ] bzImage
 * [ ] oldconfig
 
-**21.** Which make utility target is commonly used to generate a compressed kernel binary file?&#x20;
+**21.** Which make utility target is commonly used to generate a compressed kernel binary file?
 
 * [x] bzImage
 * [ ] kernel
 * [ ] config
 * [ ] clean
 
-**22.** Which program should you use to create an initial RAM disk for a Debian-based system?&#x20;
+**22.** Which program should you use to create an initial RAM disk for a Debian-based system?
 
 * [ ] mkinitrd
 * [ ] make bzImage
 * [x] mkinitramfs
 * [ ] make initrd
 
-**23.** Which command should you use to list all of the installed modules?&#x20;
+**23.** Which command should you use to list all of the installed modules?
 
 * [ ] modinfo
 * [ ] insmod
 * [ ] rmmod
 * [x] lsmod
 
-**24.** Which command should you use to install a module if you don’t know its filename?&#x20;
+**24.** Which command should you use to install a module if you don’t know its filename?
 
 * [ ] insmod
 * [ ] rmmod
 * [x] modprobe
 * [ ] lsmod
 
-**26.** Which command should you use to display information about USB devices installed on the system?&#x20;
+**26.** Which command should you use to display information about USB devices installed on the system?
 
 * [x] lsusb
 * [ ] lspci
 * [ ] lsmod
 * [ ] lsdev
 
-**27.** Which option in the lsusb command displays detailed information about the USB devices?&#x20;
+**27.** Which option in the lsusb command displays detailed information about the USB devices?
 
 * [ ] \-d
 * [ ] \-s
 * [ ] \-t
 * [x] \-v
 
-**28.** Which type of hardware devices can you connect to the Linux system as it’s running?&#x20;
+**28.** Which type of hardware devices can you connect to the Linux system as it’s running?
 
 * [ ] Coldplug
 * [x] Hotplug
 * [ ] PCI
 * [ ] PCIe
 
-**29.** What program does Linux use to detect hotplug devices and load the appropriate modules?&#x20;
+**29.** What program does Linux use to detect hotplug devices and load the appropriate modules?
 
 * [ ] lsusb
 * [x] udevd
 * [ ] modprobe
 * [ ] insmod
 
-**30.** Where are the udevd configuration settings stored?&#x20;
+**30.** Where are the udevd configuration settings stored?
 
 * [ ] /lib/modules
 * [ ] /boot
 * [ ] /etc/udev/rules.d
 * [x] /etc/udev/udev.conf
 
-**31.** Where are the udevd rules stored?&#x20;
+**31.** Where are the udevd rules stored?
 
 * [ ] /etc/udev/udevd.conf
 * [x] /etc/udev/rules.d
 * [ ] /boot
 * [ ] /lib/modules
 
-**32.** Where is the dynamic pseudo-directory the kernel creates to peek at kernel settings and performance statistics located?&#x20;
+**32.** Where is the dynamic pseudo-directory the kernel creates to peek at kernel settings and performance statistics located?
 
 * [ ] /etc/kernel
 * [ ] /boot/kernel
 * [x] /proc
 * [ ] /usr/src/linux
 
-**33.** What command allows you to change kernel settings during runtime?&#x20;
+**33.** What command allows you to change kernel settings during runtime?
 
 * [x] sysctl
 * [ ] lsmod
 * [ ] lsdev
 * [ ] modprobe
 
-**34.** Which of the following terms are used to describe 3.x kernel releases? (Choose TWO correct answers.)&#x20;
+**34.** Which of the following terms are used to describe 3.x kernel releases? (Choose TWO correct answers.)
 
 * [ ] beta
 * [ ] final
@@ -534,7 +534,7 @@ lsusb [options]
 * [ ] prereleased
 * [x] stable
 
-**35.** How can the kernel parameter for the maximum size of the shared memory segment (shmmax) be changed to 2GB (2147483648 Bytes) on a running system? (Choose TWO correct answers.)&#x20;
+**35.** How can the kernel parameter for the maximum size of the shared memory segment (shmmax) be changed to 2GB (2147483648 Bytes) on a running system? (Choose TWO correct answers.)
 
 * [ ] Edit /etc/shmmax and set the parameter to 2147483648.
 * [ ] sysctl shmmax=2147483648
@@ -542,14 +542,14 @@ lsusb [options]
 * [x] echo 2147483648 > /proc/sys/kernel/shmmax
 * [ ] export kernel.shmmax=2147483648
 
-**36.** What is the correct parameter to pass to the kernel at boot time to force it to use only one of the available processors?&#x20;
+**36.** What is the correct parameter to pass to the kernel at boot time to force it to use only one of the available processors?
 
 * [x] maxcpus=1
 * [ ] usecpus=1
 * [ ] smpcpus=1
 * [ ] vcpumx=1
 
-**37.** Which commands are used to load modules into the Linux kernel? (Choose TWO correct answers.)&#x20;
+**37.** Which commands are used to load modules into the Linux kernel? (Choose TWO correct answers.)
 
 * [x] insmod
 * [ ] loadmod
@@ -557,14 +557,14 @@ lsusb [options]
 * [x] modprobe
 * [ ] probemod
 
-**38.** What is a key difference between a zImage and bzImage kernel image?&#x20;
+**38.** What is a key difference between a zImage and bzImage kernel image?
 
 * [ ] zImage is compressed using gzip, bzImage is compressed using bzip2.
 * [ ] zImage is for 2.6 series kernels, bzImage is for 3.x series kernels.
 * [ ] zImage is limited to 64k, bzImage has no such restriction.
 * [x] zImage gets loaded completely into low memory, bzImage will load into high memory once low memory is full.
 
-**39.** Which of the following command sequences can be used to extract files contained in a initramfs file (/boot/initramfs) which is used by the kernel at boot time?&#x20;
+**39.** Which of the following command sequences can be used to extract files contained in a initramfs file (/boot/initramfs) which is used by the kernel at boot time?
 
 * [ ] cp /boot/initramfs /tmp/initramfs.gz; gzip -c /tmp/initramfs.gz; mkdir /tmp/initramfs.dir ; cd\
   /tmp/initramfs.dir ; cpio -i < /tmp/initramfs
@@ -575,7 +575,19 @@ lsusb [options]
   /tmp/initramfs.dir ; cpio -e /tmp/initramfs
 * [ ] cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mount /tmp/initramfs /mnt/ -o loop -t initrd
 
-**40.** On a server running the 3.4.50-11 Linux kernel, which file in the /boot directory contains the kernel configuration parameters?&#x20;
+**Desc**:
+
+1. `cp /boot/initramfs /tmp/initramfs.gz` - This command copies the initramfs file from the /boot directory to `/tmp` and renames it to `initramfs.gz`. Note that this step assumes the initramfs file is compressed with gzip. If it's not a gzipped file, the `.gz` extension shouldn't be added.
+
+2. `gunzip /tmp/initramfs.gz` - This command decompresses the file initramfs.gz. After decompression, the file will be named `initramfs` in the `/tmp` directory.
+
+3. `mkdir /tmp/initramfs.dir` - This creates a new directory where the contents of the initramfs file will be extracted.
+
+4. `cd /tmp/initramfs.dir` - This changes the current working directory to the newly created directory.
+
+5. `cpio -i < /tmp/initramfs` - This command uses `cpio` to extract the contents of the initramfs file into the current directory (`/tmp/initramfs.dir`). The `-i` option stands for "extract".
+
+**40.** On a server running the 3.4.50-11 Linux kernel, which file in the /boot directory contains the kernel configuration parameters?
 
 * [ ] config-linux-3.4.50-11
 * [x] config-3.4.50-11
@@ -583,7 +595,7 @@ lsusb [options]
 * [ ] vmlinuz-3.4.50-11
 * [ ] rc.config-3.4.50-11
 
-**41.** Which archive format is used to create an initramfs image?&#x20;
+**41.** Which archive format is used to create an initramfs image?
 
 * [ ] gzip
 * [ ] tar
@@ -591,7 +603,7 @@ lsusb [options]
 * [x] cpio
 * [ ] bzip2
 
-**42.** What information does the file modules.dep provide?&#x20;
+**42.** What information does the file modules.dep provide?
 
 * [ ] A list of all modules, compiled or not, that are available to the kernel.
 * [ ] A list of modules trusted by the installed kernel.
@@ -599,49 +611,49 @@ lsusb [options]
 * [x] A list of all compiled modules and their dependencies.
 * [ ] A list of modules the kernel needs to run.
 
-**43.** What is the purpose of the command udevadm monitor?&#x20;
+**43.** What is the purpose of the command udevadm monitor?
 
 * [x] It listens to kernel events produced by a udev rule and print information to the console.
 * [ ] It monitors the /dev directory for new devices.
 * [ ] It monitors the udev process and prints performance statistics to the console.
 * [ ] It communicates with D-Bus to setup new devices.
 
-**44.** How is the source code for the main Linux kernel modules distributed?&#x20;
+**44.** How is the source code for the main Linux kernel modules distributed?
 
 * [x] It is inculded with the Linux kernel source code.
 * [ ] The kernel modules and downloaded on demand as they are used during compilation.
 * [ ] The kernel modules have their own release cycle and can be maintained seprately from the Linux kernel source.
 * [ ] It is provided as a seprate download alongside the Linux kernel source code of the same version.
 
-**45.** What&#x20;
+**45.** What
 
 * [ ] lsusb
 * [ ] lspci
 * [ ] lsdev
 * [ ] uname
 
-**46.** What&#x20;
+**46.** What
 
 * [ ] lsusb
 * [ ] lspci
 * [ ] lsdev
 * [ ] uname
 
-**47.** What&#x20;
+**47.** What
 
 * [ ] lsusb
 * [ ] lspci
 * [ ] lsdev
 * [ ] uname
 
-**48.** What&#x20;
+**48.** What
 
 * [ ] lsusb
 * [ ] lspci
 * [ ] lsdev
 * [ ] uname
 
-**49.** What&#x20;
+**49.** What
 
 * [ ] lsusb
 * [ ] lspci
