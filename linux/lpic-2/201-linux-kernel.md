@@ -575,7 +575,7 @@ lsusb [options]
   /tmp/initramfs.dir ; cpio -e /tmp/initramfs
 * [ ] cp /boot/initramfs /tmp/initramfs.gz; gunzip /tmp/initramfs.gz; mount /tmp/initramfs /mnt/ -o loop -t initrd
 
-**Desc**:
+**Description**:
 
 1. `cp /boot/initramfs /tmp/initramfs.gz` - This command copies the initramfs file from the /boot directory to `/tmp` and renames it to `initramfs.gz`. Note that this step assumes the initramfs file is compressed with gzip. If it's not a gzipped file, the `.gz` extension shouldn't be added.
 
@@ -594,6 +594,8 @@ lsusb [options]
 * [ ] system-3.4.50-11
 * [ ] vmlinuz-3.4.50-11
 * [ ] rc.config-3.4.50-11
+
+**Description**: In a Linux system, the file that contains the kernel configuration parameters is typically named with the `config-` prefix followed by the kernel version. This file is located in the `/boot` directory. Based on the options you've provided and the kernel version you mentioned (3.4.50-11), the correct file would be: `config-3.4.50-11`
 
 **41.** Which archive format is used to create an initramfs image?
 
@@ -625,37 +627,113 @@ lsusb [options]
 * [ ] The kernel modules have their own release cycle and can be maintained seprately from the Linux kernel source.
 * [ ] It is provided as a seprate download alongside the Linux kernel source code of the same version.
 
-**45.** What
+**45.** Which option to the update-rc.d command will cause the removal of all symlinks to /etc/rcX.d/*test2 even when the script /etc/init.d/test2 still exists?
 
-* [ ] lsusb
-* [ ] lspci
-* [ ] lsdev
-* [ ] uname
+* [ ] -n
+* [x] -f
+* [ ] -r
+* [ ] -d
 
-**46.** What
+**Description**: The `-f` option stands for "force". When you use `update-rc.d -f test2` remove, it forces the removal of all symbolic links to the `/etc/init.d/test2` script from the `/etc/rcX.d` directories regardless of whether the `/etc/init.d/test2` script still exists.
 
-* [ ] lsusb
-* [ ] lspci
-* [ ] lsdev
-* [ ] uname
+**46.** Which of the following files will be looked for and used by GNU make, if one of them exists, unless a different file is specified on the command line when trying to compile software from source code? (Choose TWO correct answers.)
 
-**47.** What
+* [x] makefile
+* [ ] configure
+* [ ] makefile.in
+* [ ] config.h.in
+* [x] Makefile
 
-* [ ] lsusb
-* [ ] lspci
-* [ ] lsdev
-* [ ] uname
+**47.** Before compiling a new kernel , what needs to be done?
 
-**48.** What
+* [ ] Compile kernel modules.
+* [x] Configure the kernel options.
+* [ ] Delete olf kernel sources.
+* [ ] Change to runlevel 1.
 
-* [ ] lsusb
-* [ ] lspci
-* [ ] lsdev
-* [ ] uname
+**Description**: Configuring the kernel options is a critical step in the kernel compilation process. This involves selecting the necessary modules, features, and settings that the new kernel will support. This configuration can be done using tools like `make menuconfig`, make `xconfig`, or `make gconfig` in the Linux kernel source directory. The configuration process creates a `.config` file, which is used by the `make` command during the compilation process.
 
-**49.** What
+**48.** That script is included with the source of the kernel to fix a kernel ?
 
-* [ ] lsusb
-* [ ] lspci
-* [ ] lsdev
-* [ ] uname
+* [x] patch
+* [ ] patch-kernel
+* [ ] apply-patch
+* [ ] update-kernel
+
+**Description**: In the context of Linux kernel development and maintenance, the `patch` utility is used to apply changes to the kernel source code. These changes are often distributed in the form of "patch files," which contain the differences between one set of files and another. When developers fix bugs or add features, they often do so by creating a patch file that can be applied to the kernel source using the `patch` command.
+
+**49.** What command would you use to apply a diff file to an original?
+
+* [ ] cat diff -file
+* [ ] cat diff -file >> kernel
+* [ ] patch
+* [x] patch < diff -file
+* [ ] patch > diff -file
+
+**Description**: This command uses the `patch` utility, which is specifically designed for applying diff files. The diff file contains the differences between files and is applied to the original files to update them. The syntax `patch < diff-file` means that the `patch` command takes the contents of the diff file as input.
+
+**50.** After configuring a new 2.4 series kernel , all dependencies, such as included files, need to be created. How can this be achieved?
+
+* [ ] make dependencies
+* [ ] make clean
+* [ ] make mrproper
+* [x] make dep
+* [ ] make test
+
+**Description**: The `make dep` command was used specifically with older Linux kernel series like 2.4 to create dependencies. This command ensures that all the necessary headers and files are properly linked based on the configuration choices made.
+
+**51.** What two archiving formats are used to create an initramfs image?
+
+* [x] gzip
+* [ ] tar
+* [ ] rar
+* [x] cpio
+* [ ] bzip2
+
+**52.** After unpacking the source code for a Linux kernel , what is the first make command that should be executed, which will delete any current configuration and all generated files? This command will ensure that the maintainer does not leave inappropriate files in the kernel file.
+
+* [ ] make depend
+* [ ] make distclean
+* [ ] make config
+* [ ] make clean
+* [ ] make mrproper
+
+**53.** 
+
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+
+**54.** 
+
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+
+**55.** 
+
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+
+**56.** 
+
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+
+**57.** 
+
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
+* [ ] 
