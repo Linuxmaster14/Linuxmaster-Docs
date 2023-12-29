@@ -690,49 +690,372 @@ lsusb [options]
 * [x] cpio
 * [ ] bzip2
 
-**52.** After unpacking the source code for a Linux kernel , what is the first make command that should be executed, which will delete any current configuration and all generated files? This command will ensure that the maintainer does not leave inappropriate files in the kernel file.
+**52.** After unpacking the source code for a Linux kernel, what is the first make command that should be executed, which will delete any current configuration and all generated files? This command will ensure that the maintainer does not leave inappropriate files in the kernel file.
 
 * [ ] make depend
 * [ ] make distclean
 * [ ] make config
 * [ ] make clean
-* [ ] make mrproper
+* [x] make mrproper
 
-**53.** 
+**Description:** The `make mrproper` command is used to thoroughly clean the kernel source tree. It removes not only the compiled binaries and object files (which `make clean` does) but also the configuration files and other generated files that might not be needed for a fresh start. This command ensures that you start with a clean state, which is particularly important when compiling a new kernel or switching between different kernel versions.
 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
+**53.** What script, in the linux / scripts directory , can be used to add upgrades or updates to the 2.6.xx kernel source code?
 
-**54.** 
+* [ ] patch
+* [x] patch-kernel
+* [ ] kernel-update
+* [ ] upgrade-kernel
+* [ ] upgrade
 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
+**Description:** The `patch-kernel` script is designed to apply a series of patch files to the Linux kernel source. It automates the process of updating or upgrading the kernel source code with new patches, which are often released for bug fixes, security updates, and new features.
 
-**55.** 
+**54.** You have finished updating and resolving dependencies on some source code. What command should you run before recompiling the code in binary format?
 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
+* [x] make clean
+* [ ] make all
+* [ ] make dep
+* [ ] make install
 
-**56.** 
+**Description:** The purpose of `make clean` is to remove all files that were generated during previous builds. This ensures that you start the compilation with a clean slate, which is particularly important after updating source code or dependencies, as old object files or binaries might interfere with the new build process.
 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
+**55.** What tool can be used to control the behavior of runtime of udev?
 
-**57.** 
+* [ ] udev
+* [ ] udevctl
+* [x] udevadm
+* [ ] udevconfig
+* [ ] udevclient
 
-* [ ] 
+**Description**: `udevadm` is the command-line utility provided for interacting with the udev Linux device manager. It allows for managing the runtime behavior of the udev system, including triggering events, querying udev database, monitoring udev events, and controlling the udev daemon.
+
+**56.** Which command can be used to view the kernel messages created from the boot time so far?
+
+* [ ] initm
+* [ ] initmessage
+* [ ] initmsg
+* [ ] inittab
+* [x] dmesg
+
+**57.** Why mkinitrd was deprecated in favor of mkinitramfs from the series Kermel 2.6? (Select 2 correct answers).
+
+* [ ] It is not loaded until later in the boot process
+* [ ] An easy to use GUI is available in mkinitramfs
+* [x] mkinitrd depends on devfs
+* [x] SATA hard drives are not supported
+
+**58.** A precompiled module has been moved to `/lib/modules/<kernel-version>`, but `modprobe -a <module-name>` fails to load it. What needs to be done to use this module?
+
+* [ ] make modules_install must be run
+* [x] depmod must be run
+* [ ] The kernel must be re-compiled
+* [ ] Modules.conf or modprobe.conf must be edited
+* [ ] The system must be restarted
+
+**Description**: The `depmod` command creates a module dependency file (`modules.dep` and other map files) in the `/lib/modules/<kernel-version>` directory. This file is used by `modprobe` to automatically load the necessary modules and their dependencies. Running `depmod` ensures that the system is aware of the new module and its dependencies, making it possible for `modprobe` to load the module successfully.
+
+**59.** To restore a kernel source to its previous, unpatched version, which of the following commands could be used?
+
+* [ ] patch - restore
+* [ ] patch --remove
+* [ ] patch -U
+* [ ] patch -undo
+* [x] patch -R
+
+**Description:** The `-R` option with the `patch` command reverses the patching process. It essentially "undoes" the changes made by a patch. When you apply a patch using `patch`, it makes changes to the source code based on the contents of the patch file. Using `patch -R` with the same patch file will revert those changes, restoring the source code to its previous state.
+
+**60.** If the current directory is `/root` and the kernel source is located in `/usr/src/linux`, which of the following commands should be used to apply the `/tmp/foopatch `patch?
+
+* [ ] cat /tmp/foopatch | patch -p0
+* [ ] cd /usr/src/linux; cat /tmp/foopatch | patch -p0
+* [ ] cd /usr/src/linux; cat /tmp/foopatch | patch
+* [x] cd /usr/src/linux; patch -p1 < /tmp/foopatch
+* [ ] cd /usr/src/linux; patch -p1 > /tmp/foopatch
+
+**61.** A 2.6.9-ac1 kernel would be:
+
+* [ ] An alpha kernel.
+* [x] Some patch for a stable kernel.
+* [ ] A stable kernel.
+* [ ] An unstable kernel.
+* [ ] Some patch for an unstable kernel.
+
+**62.** What command should be used to find out which PCI devices can be seen, without consulting the kernel?
+
+* [x] lspci -v
+* [ ] lspci -s
+* [ ] lspci -x
+* [ ] lspci -b
+* [ ] lspci -p
+
+**Description**: The `lspci` command lists all PCI devices. The `-v` flag (for "verbose") provides detailed information about each device. This command reads the device information directly from the PCI configuration space, so it does not rely on the kernel's view of the devices.
+
+**63.** User Joseph successfully extracted and compiled a program from source code. Installing the Binaries produces errors. What is the most likely reason?
+
+* [ ] The source code was compiled for a different CPU.
+* [ ] The permissions set on the `/usr/bin` directory are wrong.
+* [x] Binaries requier root privileges to be installed.
+* [ ] An incorrect prefix was used when configuration the source code.
+
+**64.** The structure of the official Linux kernel can be classified as:
+
+* [x] Monilithic
+* [ ] Micro-kernel
+* [ ] Stable
+* [ ] Multitasking
+
+**Description**: The Linux kernel is known as a monolithic kernel. This means it operates in a single large process running entirely in a single address space. It's distinguished from micro-kernel systems where the kernel is broken down into separate processes known as servers. The terms "stable" and "multitasking" are characteristics or features of an operating system, but they do not describe its structural classification.
+
+**65.** What is the correct Linux kernel version numbering format?
+
+* [ ] 09.04
+* [ ] 2008
+* [x] 2.6.31
+* [ ] 2008 Server
+
+**66.** What do the suffixes added to the kernel version number represent?
+
+* [ ] The initials of the name of the author of the kernel.
+* [x] A specific kernel, changed from the corresponding official kernel
+* [ ] An unstable version of kernel
+* [ ] A kernel that is not provided by the official website kernel.org
+
+**67.** Where can the official kernel version specific documentation be found?
+
+* [ ] In linux newsgroups
+* [ ] In the source code of the module
+* [x] In the Documentation directory where the kernel source code was placed.
+* [ ] In the comments left by the developers.
+
+**68.** What commands can be used to generate an Initial Ramdisk?
+
+* [ ] mkisofs
+* [ ] fdisk
+* [x] mkinitramfs
+* [x] mkinitrd
+
+**69.** Which command can be used to configure the Linux kernel?
+
+* [x] make config
+* [x] make xconfig
+* [x] make menuconfig
+* [x] make gconfig
+
+**70.** The uname -r command reports:
+
+* [ ] The resources available in the running kernel.
+* [ ] The modules loaded into memory for the running kernel.
+* [ ] The modules not loaded into memory for the running kernel.
+* [x] The version of the kernel source code that is running
+
+**71.** The correct way to load the ehci_hcd module and its dependencies is:
+
+* [ ] make modules_install
+* [ ] make modules_install ehci_hcd
+* [x] modprobe ehci_hcd
+* [ ] insmode ehci_hcd
+
+**72.** What type of compression is used in a zImage kernel?
+
+* [x] gzip
+* [ ] bzip2
+* [ ] rar
+* [ ] cpio
+
+**73.** What information is not normally provided by the modinfo command? Select everything that applies.
+
+* [ ] license
+* [ ] author
+* [x] in use
+* [ ] description
+* [x] size
+
+**74.** After compiling a new kernel, which of the following is a valid filename for the compressed kernel?
+
+* [ ] kernel
+* [ ] image
+* [x] zimage
+* [ ] vmlinux
+
+**Description**: `vmlinux` is the uncompressed kernel image.
+
+**75.** Which of the following commands will show the status of the running kernel?
+
+* [x] cat /proc/sys/kernel/threads-max
+* [ ] cat /dev/kernel/threads-max
+* [ ] cat /etc/sys/kernel/threads-max
+* [ ] cat /etc/sys/kernel/threads-max
+* [ ] cat /proc/sys/kernel/threads/max
+
+**76.** What is the conventional name for a Linux kernel initially compiled and bootable on an x86 system?
+
+* [ ] /boot/vmlinux-version
+* [x] /boot/vmlinuz
+* [ ] /boot/bzImage-version
+* [ ] /usr/src/linux-version
+
+**77.** In which directory can you look for information about the options that can be applied to your computer's Ethernet driver module?
+
+* [x] /usr/src/linux/Documentation
+* [ ] /lib/modules/options
+* [ ] /usr/share/doc/modules
+* [ ] /etc/modules.conf
+
+**77.** What kind of kernel image was largely abandoned on x86 computers in favor of the bzImage format?
+
+* [ ] vmlinux
+* [x] zImage
+* [ ] initramfs
+* [ ] initrd
+
+**78.** Which of the following commands, when typed in `/usr/src/linux` after configuring the kernel, compiles the main Linux kernel file and its modules?
+
+* [x] make bzImage
+* [ ] make modules_install ehci_hcd
+* [ ] make xconfig
+* [ ] make
+
+**79.** Which of the following kernel features should you compile in the main kernel file for an x86-64 disk-based installation to simplify system startup? (Select 2 responses).
+
+* [x] Drivers for the ATA boot disk controller or SCSI host adapter.
+* [x] Support for your root file system.
+* [ ] Drivers for the USB port.
+* [ ] Framebuffer controllers for the vide card.
+
+**80.** You have compiled and installed a new kerne , version 2.6.35.4. You now want to prepare an initial RAM disk. Which of the following commands will do this, depending on your distribution? (Select 2 options).
+
+* [x] mkinitrd -o /boot/initrd-2.6.35.4 2.6.35.4
+* [ ] mkinitrd /boot/initrd-2.6.35.4
+* [x] mkinitramfs -o 2.6.35.4 /boot/initrd-2.6.35.4
+* [ ] mkinitramfs /boot/initrd-2.6.35.4
+
+**81.** You downloaded the patch file - 2.6.35.4.bz2. What program will you use as part of the patching operation to handle the compression of this file?
+
+* [x] bunzip2
+* [ ] gunzip2
+* [ ] tar
+* [ ] cpio
+
+**82.** Which of the following commands must you enter to configure a Linux kernel using an interactive text mode tool?
+
+* [ ] make xconfig
+* [x] make menuconfig
+* [ ] make config
+* [ ] make textconfig
+
+**83.** You have configured and compiled your new kernel, version 2.6.35.4. Now you type make modules_install. Where can you expect to find the module files?
+
+* [ ] /lib/modules/modules-2.6.35.4
+* [ ] /usr/src/linux/2.6.35.4
+* [x] /lib/modules/2.6.35.4
+* [ ] /usr/lib/2.6.35.4
+
+**84.** In which file in the Linux kernel source tree are configuration options stored?
+
+* [ ] kernel.conf
+* [ ] configure
+* [x] .config
+* [ ] linux.conf
+
+**Description:** The `.config` file in the root of the Linux kernel source tree holds the configuration options for the kernel. This file is generated when you run a kernel configuration tool like `make menuconfig`, `make xconfig`, or `make config`, and it reflects the choices made for various kernel features and modules. The other file names listed are not standard for storing kernel configuration options.
+
+**85.** You found a kernel module for your network card, but you don't know what parameters to use. Which command can provide you with this information?
+
+* [ ] modeprobe
+* [ ] insmode
+* [ ] depmode
+* [x] modinfo
+* [ ] cat /proc/modeinfo
+
+**86.** Which of the following commands will load a kernel module, along with all necessary dependency modules?
+
+* [ ] depmode
+* [ ] insmode
+* [x] modeprobe ehci_hcd
+* [ ] loadmode
+
+**87.** Which command should load the msdos.o module and all its dependencies?
+
+* [ ] modeinfo -a msdos
+* [ ] lsmode -a msdos
+* [x] modeprobe msdos
+* [ ] issmode -d msdos
+
+**88.** Which command will remove a kernel module?
+
+* [x] rmmod
+* [ ] unmode
+* [ ] delmod
+* [ ] modeprobe
+* [ ] unloadmod
+
+**89.** You have just added new modules to the system. Which command should you run to rebuild the modules.dep file?
+
+* [ ] depmode -rebuild
+* [ ] update-dependencies
+* [x] depmode -a
+* [ ] insmode -dependencies
+
+**90.** Which of the following correctly describes the relationship between depmod and modprobe?
+
+* [ ] modproble creats a dependency file for use by depmode.
+* [x] depmode creats a dependency file for use by modproble.
+* [ ] They have no relationship.
+* [ ] They can replace each other.
+
+**Description:** `depmod` is used to create a dependency file (typically named `modules.dep`) which lists the dependencies for each module. This file is then used by `modprobe` to understand which modules need to be loaded when a particular module is requested, ensuring that all necessary dependencies are loaded automatically. They have a complementary relationship, but they do not replace each other, as each serves a distinct purpose in the management of kernel modules.
+
+**91.** Which option of the depmod command allows you to print a list of all unresolved symbols?
+
+* [ ] -l
+* [ ] -i
+* [ ] -a
+* [x] -e
+
+**92.** Which of the following commands loads the module file into the kernel and changes any symbols that are defined on the command line?
+
+* [ ] depmode
+* [x] insmode
+* [ ] modprobe
+* [ ] setmod
+
+**93.** What option of the insmod command can be used to force the module to load even if problems are encountered?
+
+* [ ] -F
+* [x] -f
+* [ ] -u
+* [ ] -x
+
+**94.** Which option in the rmmod command specifies that all output should be sent to the syslog?
+
+* [ ] -a
+* [ ] -i
+* [x] -s
+* [ ] -d
+
+**95.** Which utility examines the object module_file file associated with a kernel module and displays all the information it can collect?
+
+* [ ] depmode
+* [x] modinfo
+* [ ] modprobe
+* [ ] insmod
+
+**96.** Which modprobe option specifies the loading of all corresponding modules instead of stopping after the first successfully loaded module is loaded?
+
+* [ ] -f
+* [ ] -c
+* [ ] -e
+* [x] -a
+
+**96.** Which modprobe option allows you to define "autoclean" on loaded modules?
+
+* [ ] -e
+* [ ] -c
+* [x] -k
+* [ ] -d
+
+**97.** 
+
 * [ ] 
 * [ ] 
 * [ ] 
