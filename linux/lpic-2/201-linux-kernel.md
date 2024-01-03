@@ -1054,9 +1054,17 @@ lsusb [options]
 * [x] -k
 * [ ] -d
 
-**97.** 
+**97.** Which parameter of the uname command can be used to display the kernel version?
 
-* [ ] 
-* [ ] 
-* [ ] 
-* [ ] 
+* [ ] -m
+* [ ] -n
+* [ ] -s
+* [ ] -v
+* [x] -r
+
+**98.** Which parameter of the uname command can be used to display the machine type (Hardware / Architecture)?
+
+* [ ] -n
+* [ ] -s
+* [x] -m
+* [ ] -r
