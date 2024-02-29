@@ -467,12 +467,12 @@ wall [-n] [-t timeout] [-g group] [message | file]
 The `/usr/bin/wall` command send simple messages to certain system users. Only users who meet the following conditions will receive these messages: Users who are currently into a terminal (tty#) or a terminal-emulator (pts/#), and Users who have their message status set to "yes"
 
 ```bash
-# mesg
+[root@linuxmaster ~]# mesg
 is n
 
-# mesg y
+[root@linuxmaster ~]# mesg y
 
-# mesg
+[root@linuxmaster ~]# mesg
 is y
 ```
 
