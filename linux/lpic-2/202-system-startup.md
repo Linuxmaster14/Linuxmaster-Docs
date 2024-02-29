@@ -5,15 +5,12 @@
 {% hint style="success" %}
 Candidates should be able to query and modify the behaviour of system services at various targets / run levels. A thorough understanding of the systemd, SysV Init and the Linux boot process is required. This objective includes interacting with systemd targets and SysV init run levels.
 
-
-
 **Key Knowledge Areas:**
 
 * Systemd
 * SysV init
 * Linux Standard Base Specification (LSB)
 
-\
 **The following is a partial list of the used files, terms and utilities:**
 
 * /usr/lib/systemd/

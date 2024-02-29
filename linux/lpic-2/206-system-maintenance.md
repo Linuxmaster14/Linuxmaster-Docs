@@ -464,12 +464,24 @@ Last login: Fri Aug 28 18:41:49 2021 from 192.168.0.11
 wall [-n] [-t timeout] [-g group] [message | file]
 ```
 
+The `/usr/bin/wall` command send simple messages to certain system users. Only users who meet the following conditions will receive these messages: Users who are currently into a terminal (tty#) or a terminal-emulator (pts/#), and Users who have their message status set to "yes"
+
+```bash
+# mesg
+is n
+
+# mesg y
+
+# mesg
+is y
+```
+
 | Option | Description                                                         |
 | ------ | ------------------------------------------------------------------- |
-| `-n`   | Suppress the banner                                                 |
+| `-n`   | Suppress the banner (do not print banner, works only for root)      |
 | `-t`   | Abandon the write attempt after the time specified (default is 300) |
 | `-g`   | Limit message to members of a group (or GID)                        |
-| `-v`   | Display version information                                         |
+| `-V`   | Display version information                                         |
 | `-h`   | Display help text                                                   |
 
 * `shutdown`: `shutdown` is used to halt, power off, or reboot the machine.
