@@ -21,6 +21,7 @@
 * [Git](devops/git.md)
 * [Terraform](devops/terraform/README.md)
   * [Terraform Basic](devops/terraform/terraform-basic.md)
+* [Kubernetes](devops/kubernetes.md)
 
 ## ⏺ AWS
 
