@@ -39,18 +39,10 @@ NAME   STATUS   ROLES                  AGE    VERSION        INTERNAL-IP    EXTE
 k8s    Ready    control-plane,master   3d2h   v1.29.4+k3s1   157.90.144.2   <none>        Ubuntu 22.04.4 LTS   5.15.0-105-generic   containerd://1.7.15-k3s1
 ```
 
-```bash
+## Pods
 
-```
+Pods are the smallest deployable units of computing that you can create and manage in Kubernetes.
 
-```bash
+A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers. A Pod's contents are always co-located and co-scheduled, and run in a shared context. A Pod models an application-specific "logical host": it contains one or more application containers which are relatively tightly coupled. In non-cloud contexts, applications executed on the same physical or virtual machine are analogous to cloud applications executed on the same logical host.
 
-```
-
-```bash
-
-```
-
-```bash
-
-```
+[Kubernetes.io - Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
