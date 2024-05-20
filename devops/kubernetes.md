@@ -92,56 +92,58 @@ pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp-pod
+  name: nginx
   labels:
-    app: myapp
+    app: nginx
+    tier: frontend
 spec:
   containers:
-    - name: nginx-controller
+    - name: nginx
       image: nginx
 ```
 
-### Create a Pod
+### Create/Apply a Pod
 
 ```bash
-# kubectl create -f pod.yaml
+# kubectl apply -f pod.yaml
 pod/myapp-pod created
 
-# kubectl get pods -o wide
-NAME        READY   STATUS    RESTARTS   AGE   IP           NODE   NOMINATED NODE   READINESS GATES
-myapp-pod   1/1     Running   0          48s   10.42.0.89   k8s    <none>           <none>
+# # kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          4s
 ```
 
 ### Describe a Pod
 
 ```bash
-# kubectl describe pod myapp-pod
-Name:             myapp-pod
+# kubectl describe pod nginx
+Name:             nginx
 Namespace:        default
 Priority:         0
 Service Account:  default
 Node:             k8s/157.90.144.2
-Start Time:       Mon, 20 May 2024 11:24:29 +0000
-Labels:           app=myapp
+Start Time:       Mon, 20 May 2024 11:37:00 +0000
+Labels:           app=nginx
+                  tier=frontend
 Annotations:      <none>
 Status:           Running
-IP:               10.42.0.89
+IP:               10.42.0.90
 IPs:
-  IP:  10.42.0.89
+  IP:  10.42.0.90
 Containers:
   nginx-controller:
-    Container ID:   containerd://0b814212b4474429116386191b667a7293f28a40801b8d99cf6cc9c104a779d7
+    Container ID:   containerd://bdd2731ff6673fe732d0bf4a9f002db8ed624ee9c2e3c21834abd30b20792d61
     Image:          nginx
     Image ID:       docker.io/library/nginx@sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c
     Port:           <none>
     Host Port:      <none>
     State:          Running
-      Started:      Mon, 20 May 2024 11:24:30 +0000
+      Started:      Mon, 20 May 2024 11:37:02 +0000
     Ready:          True
     Restart Count:  0
     Environment:    <none>
     Mounts:
-      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-zkw5v (ro)
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-9rtkw (ro)
 Conditions:
   Type                        Status
   PodReadyToStartContainers   True
@@ -150,7 +152,7 @@ Conditions:
   ContainersReady             True
   PodScheduled                True
 Volumes:
-  kube-api-access-zkw5v:
+  kube-api-access-9rtkw:
     Type:                    Projected (a volume that contains injected data from multiple sources)
     TokenExpirationSeconds:  3607
     ConfigMapName:           kube-root-ca.crt
@@ -163,9 +165,9 @@ Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists fo
 Events:
   Type    Reason     Age   From               Message
   ----    ------     ----  ----               -------
-  Normal  Scheduled  81s   default-scheduler  Successfully assigned default/myapp-pod to k8s
-  Normal  Pulling    80s   kubelet            Pulling image "nginx"
-  Normal  Pulled     80s   kubelet            Successfully pulled image "nginx" in 757ms (757ms including waiting)
-  Normal  Created    80s   kubelet            Created container nginx-controller
-  Normal  Started    80s   kubelet            Started container nginx-controller
+  Normal  Scheduled  20s   default-scheduler  Successfully assigned default/nginx to k8s
+  Normal  Pulling    20s   kubelet            Pulling image "nginx"
+  Normal  Pulled     19s   kubelet            Successfully pulled image "nginx" in 767ms (767ms including waiting)
+  Normal  Created    19s   kubelet            Created container nginx-controller
+  Normal  Started    19s   kubelet            Started container nginx-controller
 ```
