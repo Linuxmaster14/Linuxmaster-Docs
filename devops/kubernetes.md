@@ -56,7 +56,7 @@ nodes                             no           v1                               
 persistentvolumeclaims            pvc          v1                                true         PersistentVolumeClaim
 ```
 
-### Kind Versions
+#### Kind Versions
 
 | Kind       | Version |
 | ---------- | ------- |
@@ -110,7 +110,7 @@ spec:
       image: nginx
 ```
 
-### Create/Apply a Pod
+#### Create/Apply a Pod
 
 ```bash
 # kubectl apply -f pod.yaml
@@ -121,7 +121,7 @@ NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          4s
 ```
 
-### Describe a Pod
+#### Describe a Pod
 
 ```bash
 # kubectl describe pod nginx
