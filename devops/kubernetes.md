@@ -203,5 +203,254 @@ This actually means that you may never need to manipulate ReplicaSet objects: us
 #### Example
 
 ```yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replicaset
+  labels:
+    app: myapp
+    type: frontend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: myapp-replicas
+      labels:
+        app: myapp
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+```
 
+```bash
+# kubectl create -f replicaset.yaml
+replicaset.apps/myapp-replicaset created
+
+# kubectl get pods -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP           NODE   NOMINATED NODE   READINESS GATES
+myapp-replicaset-fqtxn   1/1     Running   0          31s   10.42.0.91   k8s    <none>           <none>
+myapp-replicaset-z566r   1/1     Running   0          31s   10.42.0.93   k8s    <none>           <none>
+myapp-replicaset-kbv9l   1/1     Running   0          31s   10.42.0.92   k8s    <none>           <none>
+
+# kubectl get replicasets
+NAME               DESIRED   CURRENT   READY   AGE
+myapp-replicaset   3         3         3       56s
+
+# kubectl get rs
+NAME               DESIRED   CURRENT   READY   AGE
+myapp-replicaset   3         3         3       59s
+```
+
+#### Describe ReplicaSet
+
+```bash
+# kubectl describe rs/myapp-replicaset
+Name:         myapp-replicaset
+Namespace:    default
+Selector:     type=frontend
+Labels:       app=myapp
+              type=frontend
+Annotations:  <none>
+Replicas:     3 current / 3 desired
+Pods Status:  3 Running / 0 Waiting / 0 Succeeded / 0 Failed
+Pod Template:
+  Labels:  app=myapp
+           type=frontend
+  Containers:
+   nginx-container:
+    Image:        nginx:latest
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Events:
+  Type    Reason            Age    From                   Message
+  ----    ------            ----   ----                   -------
+  Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-fqtxn
+  Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-kbv9l
+  Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-z566r
+```
+
+```bash
+# kubectl get pods myapp-replicaset-kbv9l -o yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: "2024-05-21T11:24:51Z"
+  generateName: myapp-replicaset-
+  labels:
+    app: myapp
+    type: frontend
+  name: myapp-replicaset-kbv9l
+  namespace: default
+  ownerReferences:
+  - apiVersion: apps/v1
+    blockOwnerDeletion: true
+    controller: true
+    kind: ReplicaSet
+    name: myapp-replicaset
+    uid: d401b705-74e2-4f4b-a84c-f16956aff1c3
+  resourceVersion: "109572"
+  uid: 7108b120-c428-4af7-a5ef-67afd49ddb06
+spec:
+  containers:
+  - image: nginx:latest
+    imagePullPolicy: Always
+    name: nginx-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: kube-api-access-64w99
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: k8s
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - name: kube-api-access-64w99
+    projected:
+      defaultMode: 420
+      sources:
+      - serviceAccountToken:
+          expirationSeconds: 3607
+          path: token
+      - configMap:
+          items:
+          - key: ca.crt
+            path: ca.crt
+          name: kube-root-ca.crt
+      - downwardAPI:
+          items:
+          - fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+            path: namespace
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-21T11:24:53Z"
+    status: "True"
+    type: PodReadyToStartContainers
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-21T11:24:51Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-21T11:24:53Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-21T11:24:53Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2024-05-21T11:24:51Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: containerd://f54298a7f82ef810cde637c0c80bc3a14029b18ae0aae50c756b09301c407b6e
+    image: docker.io/library/nginx:latest
+    imageID: docker.io/library/nginx@sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c
+    lastState: {}
+    name: nginx-container
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2024-05-21T11:24:53Z"
+  hostIP: 157.90.144.2
+  hostIPs:
+  - ip: 157.90.144.2
+  phase: Running
+  podIP: 10.42.0.92
+  podIPs:
+  - ip: 10.42.0.92
+  qosClass: BestEffort
+  startTime: "2024-05-21T11:24:51Z"
+```
+
+#### Scaling a ReplicaSet
+
+A ReplicaSet can be easily scaled up or down by simply updating the .spec.replicas field. The ReplicaSet controller ensures that a desired number of Pods with a matching label selector are available and operational.
+
+When scaling down, the ReplicaSet controller chooses which pods to delete by sorting the available pods to prioritize scaling down pods based on the following general algorithm:
+
+1. Pending (and unschedulable) pods are scaled down first
+2. If `controller.kubernetes.io/pod-deletion-cost` annotation is set, then the pod with the lower value will come first.
+3. Pods on nodes with more replicas come before pods on nodes with fewer replicas.
+4. If the pods' creation times differ, the pod that was created more recently comes before the older pod (the creation times are bucketed on an integer log scale when the `LogarithmicScaleDown` feature gate is enabled)
+
+If all of the above match, then selection is random.
+
+#### Example
+
+```yaml
+...
+spec:
+  replicas: 8
+...
+```
+
+```bash
+# kubectl replace -f replicaset.yaml
+replicaset.apps/myapp-replicaset replaced
+
+# kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+myapp-replicaset-fqtxn   1/1     Running   0          15m
+myapp-replicaset-z566r   1/1     Running   0          15m
+myapp-replicaset-kbv9l   1/1     Running   0          15m
+myapp-replicaset-cnh5v   1/1     Running   0          3s
+myapp-replicaset-jzmk2   1/1     Running   0          3s
+myapp-replicaset-5l5kj   1/1     Running   0          3s
+myapp-replicaset-qfjzp   1/1     Running   0          3s
+myapp-replicaset-2ww4g   1/1     Running   0          3s
+```
+
+```bash
+# kubectl scale --replicas=5 replicaset myapp-replicaset
+replicaset.apps/myapp-replicaset scaled
+
+# kubectl get pods
+NAME                     READY   STATUS    RESTARTS   AGE
+myapp-replicaset-fqtxn   1/1     Running   0          17m
+myapp-replicaset-z566r   1/1     Running   0          17m
+myapp-replicaset-kbv9l   1/1     Running   0          17m
+myapp-replicaset-cnh5v   1/1     Running   0          92s
+myapp-replicaset-5l5kj   1/1     Running   0          92s
+```
+
+#### Deleting a ReplicaSet 
+
+```bash
+# kubectl delete replicasets myapp-replicaset
+replicaset.apps "myapp-replicaset" deleted
+
+# kubectl get pods
+No resources found in default namespace.
 ```
