@@ -473,3 +473,89 @@ The following are typical use cases for Deployments:
 - Use the status of the Deployment as an indicator that a rollout has stuck.
 - Clean up older ReplicaSets that you don't need anymore.
 
+#### Example
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    app: myapp
+    type: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      type: frontend
+  template:
+    metadata:
+      name: myapp-deployment
+      labels:
+        app: myapp
+        type: frontend
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:latest
+```
+
+```bash
+# kubectl create -f deployment.yaml
+deployment.apps/myapp-deployment created
+
+# kubectl get pods
+NAME                                READY   STATUS    RESTARTS   AGE
+myapp-deployment-69c58b88c6-bn7mm   1/1     Running   0          13s
+myapp-deployment-69c58b88c6-5q6st   1/1     Running   0          13s
+
+# kubectl get deployments
+NAME               READY   UP-TO-DATE   AVAILABLE   AGE
+myapp-deployment   2/2     2            2           38s
+
+# kubectl get replicasets
+NAME                          DESIRED   CURRENT   READY   AGE
+myapp-deployment-69c58b88c6   2         2         2       66s
+```
+
+```bash
+# kubectl get all
+NAME                                    READY   STATUS    RESTARTS   AGE
+pod/myapp-deployment-69c58b88c6-bn7mm   1/1     Running   0          2m1s
+pod/myapp-deployment-69c58b88c6-5q6st   1/1     Running   0          2m1s
+
+NAME                 TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)   AGE
+service/kubernetes   ClusterIP   10.43.0.1    <none>        443/TCP   7d4h
+
+NAME                               READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/myapp-deployment   2/2     2            2           2m1s
+
+NAME                                          DESIRED   CURRENT   READY   AGE
+replicaset.apps/myapp-deployment-69c58b88c6   2         2         2       2m1s
+```
+
+```bash
+# kubectl exec -it pod/myapp-deployment-69c58b88c6-5q6st -- nginx -v
+nginx version: nginx/1.25.5
+```
+
+#### Upgrade application
+
+1. Update yaml file with new configuration
+```yaml
+...
+image: nginx:1.26.0
+...
+```
+
+2. Apply new changes
+
+```bash
+# kubectl apply -f deployment.yaml
+deployment.apps/myapp-deployment configured
+```
+
+```bash
+# kubectl set image deployment/myapp-deployment nginx-container=nginx:1.24.0
+deployment.apps/myapp-deployment image updated
+```
