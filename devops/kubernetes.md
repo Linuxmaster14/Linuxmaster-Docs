@@ -104,7 +104,7 @@ pod/nginx created
 # kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          7s
-
+  
 # kubectl apply -f pod.yaml
 pod/myapp-pod created
 
