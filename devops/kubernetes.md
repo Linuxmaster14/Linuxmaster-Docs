@@ -698,6 +698,65 @@ spec:
           image: redis:latest
 ```
 
+### StatefulSet Example with Volumes
+
+```yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  labels:
+    name: redis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
+          volumeMounts:
+            - name: redis-data
+              mountPath: /var/lib/redis
+  volumeClaimTemplates:
+    - metadata:
+        name: redis-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+```
+
+```bash
+# kubectl apply -f sts.yaml
+statefulset.apps/redis created
+
+# kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+redis-0   1/1     Running   0          41s
+redis-1   1/1     Running   0          33s
+redis-2   1/1     Running   0          27s
+
+# kubectl get pvc
+NAME                 STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+redis-data-redis-0   Bound    pvc-053e82b4-8965-43bd-9953-bd22231294a7   1Gi        RWO            local-path     <unset>                 89s
+redis-data-redis-1   Bound    pvc-4b0ffa32-5fc2-415f-a812-281272722875   1Gi        RWO            local-path     <unset>                 81s
+redis-data-redis-2   Bound    pvc-463e9ac4-64fa-474f-b633-f87e7c36c90c   1Gi        RWO            local-path     <unset>                 75s
+
+# kubectl get pv
+NAME                                       CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS   CLAIM                        STORAGECLASS   VOLUMEATTRIBUTESCLASS   REASON   AGE
+pvc-053e82b4-8965-43bd-9953-bd22231294a7   1Gi        RWO            Delete           Bound    default/redis-data-redis-0   local-path     <unset>                          2m14s
+pvc-4b0ffa32-5fc2-415f-a812-281272722875   1Gi        RWO            Delete           Bound    default/redis-data-redis-1   local-path     <unset>                          2m8s
+pvc-463e9ac4-64fa-474f-b633-f87e7c36c90c   1Gi        RWO            Delete           Bound    default/redis-data-redis-2   local-path     <unset>                          2m2s
+```
+
 #### StatefulSet Commands
 
 ```bash
