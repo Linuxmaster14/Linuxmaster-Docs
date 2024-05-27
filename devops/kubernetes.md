@@ -17,9 +17,7 @@ curl -sfL https://get.k3s.io | sh -
 Client Version: v1.29.4+k3s1
 Kustomize Version: v5.0.4-0.20230601165947-6ce0bf390ce3
 Server Version: v1.29.4+k3s1
-```
 
-```bash
 # kubectl help | head
 kubectl controls the Kubernetes cluster manager.
 
@@ -30,9 +28,7 @@ Basic Commands (Beginner):
   expose          Take a replication controller, service, deployment or pod and expose it as a new Kubernetes service
   run             Run a particular image on the cluster
   set             Set specific features on objects
-```
 
-```bash
 # kubectl get nodes
 NAME   STATUS   ROLES                  AGE    VERSION
 k8s    Ready    control-plane,master   3d2h   v1.29.4+k3s1
@@ -40,9 +36,7 @@ k8s    Ready    control-plane,master   3d2h   v1.29.4+k3s1
 # kubectl get nodes -o wide
 NAME   STATUS   ROLES                  AGE    VERSION        INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION       CONTAINER-RUNTIME
 k8s    Ready    control-plane,master   3d2h   v1.29.4+k3s1   157.90.144.2   <none>        Ubuntu 22.04.4 LTS   5.15.0-105-generic   containerd://1.7.15-k3s1
-```
 
-```bash
 # kubectl api-resources | head
 NAME                              SHORTNAMES   APIVERSION                        NAMESPACED   KIND
 bindings                                       v1                                true         Binding
@@ -56,7 +50,7 @@ nodes                             no           v1                               
 persistentvolumeclaims            pvc          v1                                true         PersistentVolumeClaim
 ```
 
-#### Kind Versions
+### Kind Versions
 
 | Kind       | Version |
 | ---------- | ------- |
@@ -85,16 +79,7 @@ Pods in a Kubernetes cluster are used in two main ways:
 
 [Kubernetes.io - Pods](https://kubernetes.io/docs/concepts/workloads/pods/)
 
-```bash
-# kubectl run nginx --image=nginx
-pod/nginx created
-
-# kubectl get pods
-NAME    READY   STATUS    RESTARTS   AGE
-nginx   1/1     Running   0          7s
-```
-
-#### Example
+### Pod Example
 
 ```yaml
 apiVersion: v1
@@ -110,20 +95,23 @@ spec:
       image: nginx
 ```
 
-#### Create/Apply a Pod
+### Pod Commands
 
 ```bash
+# kubectl run nginx --image=nginx
+pod/nginx created
+
+# kubectl get pods
+NAME    READY   STATUS    RESTARTS   AGE
+nginx   1/1     Running   0          7s
+
 # kubectl apply -f pod.yaml
 pod/myapp-pod created
 
 # # kubectl get pods
 NAME    READY   STATUS    RESTARTS   AGE
 nginx   1/1     Running   0          4s
-```
 
-#### Describe a Pod
-
-```bash
 # kubectl describe pod nginx
 Name:             nginx
 Namespace:        default
@@ -200,7 +188,7 @@ This actually means that you may never need to manipulate ReplicaSet objects: us
 
 [Kubernetes.io - ReplicaSet](https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/)
 
-#### Example
+### ReplicaSet Example
 
 ```yaml
 apiVersion: apps/v1
@@ -227,6 +215,8 @@ spec:
           image: nginx:latest
 ```
 
+### ReplicaSet Commands
+
 ```bash
 # kubectl create -f replicaset.yaml
 replicaset.apps/myapp-replicaset created
@@ -244,11 +234,7 @@ myapp-replicaset   3         3         3       56s
 # kubectl get rs
 NAME               DESIRED   CURRENT   READY   AGE
 myapp-replicaset   3         3         3       59s
-```
 
-#### Describe ReplicaSet
-
-```bash
 # kubectl describe rs/myapp-replicaset
 Name:         myapp-replicaset
 Namespace:    default
@@ -275,9 +261,7 @@ Events:
   Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-fqtxn
   Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-kbv9l
   Normal  SuccessfulCreate  5m56s  replicaset-controller  Created pod: myapp-replicaset-z566r
-```
 
-```bash
 # kubectl get pods myapp-replicaset-kbv9l -o yaml
 apiVersion: v1
 kind: Pod
@@ -407,7 +391,7 @@ When scaling down, the ReplicaSet controller chooses which pods to delete by sor
 
 If all of the above match, then selection is random.
 
-#### Example
+### Scaling Example
 
 ```yaml
 ...
@@ -415,6 +399,8 @@ spec:
   replicas: 8
 ...
 ```
+
+### Scaling Commands
 
 ```bash
 # kubectl replace -f replicaset.yaml
@@ -430,9 +416,7 @@ myapp-replicaset-jzmk2   1/1     Running   0          3s
 myapp-replicaset-5l5kj   1/1     Running   0          3s
 myapp-replicaset-qfjzp   1/1     Running   0          3s
 myapp-replicaset-2ww4g   1/1     Running   0          3s
-```
 
-```bash
 # kubectl scale --replicas=5 replicaset myapp-replicaset
 replicaset.apps/myapp-replicaset scaled
 
@@ -443,11 +427,7 @@ myapp-replicaset-z566r   1/1     Running   0          17m
 myapp-replicaset-kbv9l   1/1     Running   0          17m
 myapp-replicaset-cnh5v   1/1     Running   0          92s
 myapp-replicaset-5l5kj   1/1     Running   0          92s
-```
 
-#### Deleting a ReplicaSet 
-
-```bash
 # kubectl delete replicasets myapp-replicaset
 replicaset.apps "myapp-replicaset" deleted
 
@@ -473,7 +453,9 @@ The following are typical use cases for Deployments:
 - Use the status of the Deployment as an indicator that a rollout has stuck.
 - Clean up older ReplicaSets that you don't need anymore.
 
-#### Example
+[Kubernetes.io - Deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/)
+
+### Deployment Example
 
 ```yaml
 apiVersion: apps/v1
@@ -500,6 +482,8 @@ spec:
           image: nginx:latest
 ```
 
+### Deployment Commands
+
 ```bash
 # kubectl create -f deployment.yaml
 deployment.apps/myapp-deployment created
@@ -516,9 +500,7 @@ myapp-deployment   2/2     2            2           38s
 # kubectl get replicasets
 NAME                          DESIRED   CURRENT   READY   AGE
 myapp-deployment-69c58b88c6   2         2         2       66s
-```
 
-```bash
 # kubectl get all
 NAME                                    READY   STATUS    RESTARTS   AGE
 pod/myapp-deployment-69c58b88c6-bn7mm   1/1     Running   0          2m1s
@@ -532,14 +514,12 @@ deployment.apps/myapp-deployment   2/2     2            2           2m1s
 
 NAME                                          DESIRED   CURRENT   READY   AGE
 replicaset.apps/myapp-deployment-69c58b88c6   2         2         2       2m1s
-```
 
-```bash
 # kubectl exec -it pod/myapp-deployment-69c58b88c6-5q6st -- nginx -v
 nginx version: nginx/1.25.5
 ```
 
-#### Upgrade application
+#### Upgrade an application
 
 1. Update yaml file with new configuration
 ```yaml
@@ -572,7 +552,7 @@ Each Pod gets its own IP address (Kubernetes expects network plugins to ensure t
 
 [Kubernetes.io - Service](https://kubernetes.io/docs/concepts/services-networking/service/)
 
-#### Example
+### Service Example
 
 ```yaml
 apiVersion: v1
@@ -588,18 +568,6 @@ spec:
     app: myapp
     name: redis-db
 ```
-
-```bash
-# kubectl apply -f service.yaml
-service/redis-db created
-
-# kubectl get services
-NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
-kubernetes   ClusterIP   10.43.0.1     <none>        443/TCP    7d13h
-redis-db     ClusterIP   10.43.16.42   <none>        6379/TCP   9s
-```
-
-#### Example
 
 ```yaml
 apiVersion: v1
@@ -617,7 +585,17 @@ spec:
     name: front-end
 ```
 
+### Service Commands
+
 ```bash
+# kubectl apply -f service.yaml
+service/redis-db created
+
+# kubectl get services
+NAME         TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)    AGE
+kubernetes   ClusterIP   10.43.0.1     <none>        443/TCP    7d13h
+redis-db     ClusterIP   10.43.16.42   <none>        6379/TCP   9s
+
 # kubectl apply -f service.yaml
 service/web-service created
 
@@ -640,7 +618,9 @@ Some typical uses of a DaemonSet are:
 
 In a simple case, one DaemonSet, covering all nodes, would be used for each type of daemon. A more complex setup might use multiple DaemonSets for a single type of daemon, but with different flags and/or different memory and cpu requests for different hardware types.
 
-#### Example
+[Kubernetes.io - DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
+
+### DaemonSet Example
 
 ```yaml
 apiVersion: apps/v1
@@ -663,6 +643,8 @@ spec:
         - name: node-exporter
           image: prom/node-exporter:latest
 ```
+
+### DaemonSet Commands
 
 ```bash
 # kubectl create ns promethues
@@ -690,12 +672,52 @@ Like a Deployment, a StatefulSet manages Pods that are based on an identical con
 
 If you want to use storage volumes to provide persistence for your workload, you can use a StatefulSet as part of the solution. Although individual Pods in a StatefulSet are susceptible to failure, the persistent Pod identifiers make it easier to match existing volumes to the new Pods that replace any that have failed.
 
-#### Example
+[Kubernetes.io - StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/)
+
+### StatefulSet Example
 
 ```yaml
-
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis
+  labels:
+    name: redis
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:latest
 ```
 
-```bash
+#### StatefulSet Commands
 
+```bash
+# kubectl apply -f sts.yaml
+statefulset.apps/redis created
+
+# kubectl get statefulsets
+NAME    READY   AGE
+redis   3/3     14s
+
+# kubectl get sts
+NAME    READY   AGE
+redis   3/3     55s
+
+# kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+redis-0   1/1     Running   0          67s
+redis-1   1/1     Running   0          63s
+redis-2   1/1     Running   0          61s
+
+# kubectl delete sts redis
+statefulset.apps "redis" deleted
 ```
