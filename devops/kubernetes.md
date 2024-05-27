@@ -698,6 +698,30 @@ spec:
           image: redis:latest
 ```
 
+#### StatefulSet Commands
+
+```bash
+# kubectl apply -f sts.yaml
+statefulset.apps/redis created
+
+# kubectl get statefulsets
+NAME    READY   AGE
+redis   3/3     14s
+
+# kubectl get sts
+NAME    READY   AGE
+redis   3/3     55s
+
+# kubectl get pods
+NAME      READY   STATUS    RESTARTS   AGE
+redis-0   1/1     Running   0          67s
+redis-1   1/1     Running   0          63s
+redis-2   1/1     Running   0          61s
+
+# kubectl delete sts redis
+statefulset.apps "redis" deleted
+```
+
 ### StatefulSet Example with Volumes
 
 ```yaml
@@ -755,28 +779,4 @@ NAME                                       CAPACITY   ACCESS MODES   RECLAIM POL
 pvc-053e82b4-8965-43bd-9953-bd22231294a7   1Gi        RWO            Delete           Bound    default/redis-data-redis-0   local-path     <unset>                          2m14s
 pvc-4b0ffa32-5fc2-415f-a812-281272722875   1Gi        RWO            Delete           Bound    default/redis-data-redis-1   local-path     <unset>                          2m8s
 pvc-463e9ac4-64fa-474f-b633-f87e7c36c90c   1Gi        RWO            Delete           Bound    default/redis-data-redis-2   local-path     <unset>                          2m2s
-```
-
-#### StatefulSet Commands
-
-```bash
-# kubectl apply -f sts.yaml
-statefulset.apps/redis created
-
-# kubectl get statefulsets
-NAME    READY   AGE
-redis   3/3     14s
-
-# kubectl get sts
-NAME    READY   AGE
-redis   3/3     55s
-
-# kubectl get pods
-NAME      READY   STATUS    RESTARTS   AGE
-redis-0   1/1     Running   0          67s
-redis-1   1/1     Running   0          63s
-redis-2   1/1     Running   0          61s
-
-# kubectl delete sts redis
-statefulset.apps "redis" deleted
 ```
